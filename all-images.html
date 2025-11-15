@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Images — Photography Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200&display=swap" rel="stylesheet">
+  <style>
+    /* === copied styles from index.html === */
+    body {
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg-color, #000013);
+      color: var(--text-color, rgb(242,242,242));
+    }
+    :root {
+      --bg-color: #000013;
+      --text-color: rgb(242,242,242);
+      --accent-color: #1e3a8a;
+    }
+    .light-mode {
+      --bg-color: #f5f5f5;
+      --text-color: #000013;
+      --accent-color: #3b82f6;
+    }
+    .logo img { width: 90px; height: auto; }
+
+    #lang-toggle, #theme-toggle, #back-to-top {
+      position: fixed; z-index: 999; cursor: pointer;
+    }
+
+    #lang-toggle {
+      top: 20px; right: 95px;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white; font-weight: 600; font-size: 15px;
+      letter-spacing: 0.5px; transition: transform 0.2s, opacity 0.2s;
+    }
+    #lang-toggle:hover { transform: scale(1.1); opacity: 0.85; }
+
+    #theme-toggle {
+      top: 20px; right: 20px;
+      width: 60px; height: 30px; background: transparent; border: none;
+    }
+    .toggle-track { width:100%; height:100%; background:#888; border-radius:50px; position:relative; transition: background 0.3s; }
+    .toggle-thumb { width:28px; height:28px; border-radius:50%; background:white; position:absolute; top:1px; left:1px; display:flex; align-items:center; justify-content:center; transition:left 0.3s; }
+    body.light-mode .toggle-thumb { left:31px; }
+    .icon-sun,.icon-moon { width:16px;height:16px; }
+    .icon-sun { display:block; } body.light-mode .icon-sun { display:none; }
+    .icon-moon { display:none; } body.light-mode .icon-moon { display:block; }
+
+    section { padding: 80px 40px; max-width: 1200px; margin:auto; }
+    h1, h2 { margin-bottom: 40px; }
+
+    .gallery { column-count:3; column-gap:15px; }
+    .gallery img {
+      width:100%; margin-bottom:15px; border-radius:6px; cursor:zoom-in;
+      display:block; transition:transform 0.3s ease; will-change:transform; position:relative;
+    }
+    .gallery img:hover { transform:scale(1.05); z-index:1; }
+
+    @media(max-width:768px){ .gallery{column-count:2;} }
+    @media(max-width:480px){ .gallery{column-count:1;} }
+
+    footer { text-align:center; padding:20px; color:#aaa; }
+
+    .logo { position:fixed; top:20px; left:20px; z-index:200; }
+
+    #lightbox-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.9); display:none; justify-content:center; align-items:center; z-index:1000; cursor:zoom-out; }
+    #lightbox-overlay img { max-width:90%; max-height:90%; border-radius:6px; box-shadow:0 0 20px rgba(0,0,0,0.5);}
+    .lightbox-arrow { position:absolute; top:50%; transform:translateY(-50%); font-size:60px; color:white; background:none; border:none; cursor:pointer; padding:10px 20px; opacity:0.6; z-index:2000;}
+    .lightbox-arrow:hover { opacity:1; }
+    .lightbox-arrow.left { left:3%; }
+    .lightbox-arrow.right { right:3%; }
+
+    #back-to-top { bottom:30px; right:30px; width:55px; height:55px; border-radius:50%; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); font-size:28px; display:none; color:white; backdrop-filter:blur(10px); }
+    #back-to-top:hover { transform:scale(1.12); opacity:0.85; }
+
+    body.light-mode #lang-toggle, body.light-mode #back-to-top {
+      color:black; background:rgba(0,0,0,0.1); border:1px solid rgba(0,0,0,0.2);
+    }
+
+    .back-link { display:inline-block; margin-bottom:30px; text-decoration:none; color:var(--accent-color); font-weight:bold; }
+    .back-link:hover { text-decoration:underline; }
+  </style>
+</head>
+<body>
+
+<!-- LANGUAGE & THEME BUTTONS -->
+<button id="lang-toggle">FR</button>
+<button id="theme-toggle" aria-label="Toggle dark/light mode">
+  <div class="toggle-track"><div class="toggle-thumb">
+    <img src="images/icon-sun.svg" class="icon-sun">
+    <img src="images/icon-moon.svg" class="icon-moon">
+  </div></div>
+</button>
+
+<a href="index.html" class="logo">
+  <img src="images/logo3f.png" alt="Logo" />
+</a>
+
+<section>
+  <a href="index.html" class="back-link">← Back to Home</a>
+  <h1>All Images</h1>
+  <div class="gallery" id="all-gallery">
+    <!-- Add all your images here -->
+    <img src="images/pro1.jpg">
+    <img src="images/pro2.jpg">
+    <img src="images/pro3.jpg">
+    <img src="images/personal1.jpg">
+    <img src="images/personal2.jpg">
+    <img src="images/personal3.jpg">
+    <!-- You can continue adding more images -->
+  </div>
+</section>
+
+<footer>
+  © 2025 Benjamin Claudon — All Rights Reserved
+</footer>
+
+<button id="back-to-top">↑</button>
+
+<!-- Lightbox -->
+<div id="lightbox-overlay">
+  <button class="lightbox-arrow left" id="lb-prev">❮</button>
+  <img src="">
+  <button class="lightbox-arrow right" id="lb-next">❯</button>
+</div>
+
+<script>
+/* LANGUAGE SYSTEM */
+const translations = {
+  en: { gallery:"Gallery", about:"About", socials:"Socials", aboutMe:"About Me", contact:"Contact", professional:"Professional", personal:"Personal", aboutText:"I'm a 15-year-old photographer based in Paris, France." },
+  fr: { gallery:"Galerie", about:"À propos", socials:"Réseaux", aboutMe:"À propos de moi", contact:"Contact", professional:"Professionnel", personal:"Personnel", aboutText:"Je suis un photographe amateur de 15 ans basé à Paris." }
+};
+let currentLang = localStorage.getItem("lang")||"en";
+function applyLanguage(lang){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ const key=el.getAttribute("data-i18n"); el.textContent=translations[lang][key]; });
+  document.getElementById("lang-toggle").textContent = lang==="en"?"FR":"EN";
+  localStorage.setItem("lang",lang);
+}
+applyLanguage(currentLang);
+document.getElementById("lang-toggle").addEventListener("click",()=>{ currentLang=currentLang==="en"?"fr":"en"; applyLanguage(currentLang); });
+
+/* THEME TOGGLE */
+const toggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
+const currentTheme = localStorage.getItem('theme') || 'dark';
+if(currentTheme==='light') body.classList.add('light-mode');
+toggleBtn.addEventListener('click',()=>{ const isLight=body.classList.toggle('light-mode'); localStorage.setItem('theme',isLight?'light':'dark'); });
+
+/* LIGHTBOX */
+const overlay = document.getElementById('lightbox-overlay');
+const overlayImg = overlay.querySelector('img');
+const next = document.getElementById('lb-next');
+const prev = document.getElementById('lb-prev');
+let galleryArr = [];
+let index = 0;
+
+function openLightbox(i, arr){
+  galleryArr=arr; index=i; overlayImg.src=arr[i].src; overlay.style.display="flex"; overlay.style.opacity=1;
+}
+
+document.querySelectorAll('.gallery').forEach(g=>{
+  const imgs=[...g.querySelectorAll('img')];
+  imgs.forEach((img,i)=>img.addEventListener('click',()=>openLightbox(i,imgs)));
+});
+
+next.onclick=e=>{ e.stopPropagation(); index=(index+1)%galleryArr.length; overlayImg.src=galleryArr[index].src; };
+prev.onclick=e=>{ e.stopPropagation(); index=(index-1+galleryArr.length)%galleryArr.length; overlayImg.src=galleryArr[index].src; };
+overlay.onclick=()=>overlay.style.display="none";
+document.addEventListener('keydown',e=>{ if(e.key==="Escape") overlay.style.display="none"; if(e.key==="ArrowRight") next.click(); if(e.key==="ArrowLeft") prev.click(); });
+
+/* BACK TO TOP */
+const back = document.getElementById('back-to-top');
+window.addEventListener('scroll',()=>{ back.style.display=window.scrollY>400?'block':'none'; });
+back.onclick=()=>window.scrollTo({top:0, behavior:"smooth"});
+</script>
+
+</body>
+</html>
